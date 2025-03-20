@@ -1,9 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class GameObject {
 
@@ -14,11 +10,8 @@ public class GameObject {
     
         private Wall[] walls = new Wall[6];
     
-        private Set<Integer> activeKeys = new HashSet<>();
-    
         private int posX, posY, posZ;
         private int width, height, depth;
-        private int speed = 2;
     
         private Vector[] vectors = new Vector[8];
     
@@ -62,27 +55,6 @@ public class GameObject {
             for (Wall wall : walls) {
                 wall.DrawWall(g);
             }
-        }
-    
-        public void KeyPressed(KeyEvent k) {
-            activeKeys.add(k.getKeyCode());
-        }
-    
-        public void KeyReleased(KeyEvent k) {
-            activeKeys.remove(k.getKeyCode());
-        }
-    
-        public void TranslatePos() {
-    
-            if (activeKeys.contains(KeyEvent.VK_RIGHT)) posX += speed;
-            if (activeKeys.contains(KeyEvent.VK_LEFT)) posX -= speed;
-            if (activeKeys.contains(KeyEvent.VK_UP)) posY -= speed;
-            if (activeKeys.contains(KeyEvent.VK_DOWN)) posY += speed;
-            if (activeKeys.contains(KeyEvent.VK_E)) posZ += speed;
-            if (activeKeys.contains(KeyEvent.VK_Q)) posZ -= speed;
-        
-            UpdateVerticiesPos();
-    
         }
     
         public void CreateVerticies() {
