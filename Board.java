@@ -17,7 +17,7 @@ public class Board extends JPanel implements KeyListener{
         super();
         setPreferredSize(new Dimension(800, 800));
         setDoubleBuffered(true);
-        object = new GameObject(600, 400, 100, 100);
+        object = new GameObject(600, 400, 100, 100, 200, 100);
     }
 
 

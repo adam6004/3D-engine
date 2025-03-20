@@ -16,17 +16,20 @@ public class GameObject {
     
         private Set<Integer> activeKeys = new HashSet<>();
     
-        private int posX, posY, posZ, size;
+        private int posX, posY, posZ;
+        private int width, height, depth;
         private int speed = 2;
     
         private Vector[] vectors = new Vector[8];
     
-        public GameObject(int posX, int posY, int posZ, int size) {
+        public GameObject(int posX, int posY, int posZ, int width, int height, int depth) {
     
             this.posX = posX;
             this.posY = posY;
             this.posZ = posZ;
-            this.size = size;
+            this.width = width;
+            this.height = height;
+            this.depth = depth;
     
     
             CreateVerticies();
@@ -85,69 +88,29 @@ public class GameObject {
         public void CreateVerticies() {
     
             //front wall
-            vectors[0] = new Vector(posX-size/2, posY-size/2, posZ-size/2);
-            vectors[1] = new Vector(posX+size/2, posY-size/2, posZ-size/2);
-            vectors[2] = new Vector(posX+size/2, posY+size/2, posZ-size/2);
-            vectors[3] = new Vector(posX-size/2, posY+size/2, posZ-size/2);
+            vectors[0] = new Vector(posX-width/2, posY-height/2, posZ-depth/2);
+            vectors[1] = new Vector(posX+width/2, posY-height/2, posZ-depth/2);
+            vectors[2] = new Vector(posX+width/2, posY+height/2, posZ-depth/2);
+            vectors[3] = new Vector(posX-width/2, posY+height/2, posZ-depth/2);
             
     
             //back wall
-            vectors[4] = new Vector(posX+size/2, posY-size/2, posZ+size/2);
-            vectors[5] = new Vector(posX-size/2, posY-size/2, posZ+size/2);
-            vectors[6] = new Vector(posX-size/2, posY+size/2, posZ+size/2);
-            vectors[7] = new Vector(posX+size/2, posY+size/2, posZ+size/2);
+            vectors[4] = new Vector(posX+width/2, posY-height/2, posZ+depth/2);
+            vectors[5] = new Vector(posX-width/2, posY-height/2, posZ+depth/2);
+            vectors[6] = new Vector(posX-width/2, posY+height/2, posZ+depth/2);
+            vectors[7] = new Vector(posX+width/2, posY+height/2, posZ+depth/2);
         }
     
         public void UpdateVerticiesPos() {
     
     
             for (int i = 0; i < vectors.length; i++) {
-                vectors[i].setX(posX + (OFFSETS[i][0] * size / 2));
-                vectors[i].setY(posY + (OFFSETS[i][1] * size / 2));
-                vectors[i].setZ(posZ + (OFFSETS[i][2] * size / 2));
+                vectors[i].setX(posX + (OFFSETS[i][0] * width / 2));
+                vectors[i].setY(posY + (OFFSETS[i][1] * height / 2));
+                vectors[i].setZ(posZ + (OFFSETS[i][2] * depth / 2));
             }
     
         // Update all walls with the new vertex positions
-        
-        // for (int i = 0; i < walls.length; i++) {
-        //     walls[i].setPerspectiveVer(i);
-        // }
-
-
-        // //front wall verticies
-        // vectors[0].setX(posX-size/2);
-        // vectors[0].setY(posY-size/2);
-        // vectors[0].setZ(posZ-size/2);
-
-        // vectors[1].setX(posX+size/2);
-        // vectors[1].setY(posY-size/2);
-        // vectors[1].setZ(posZ-size/2);
-
-        // vectors[2].setX(posX+size/2);
-        // vectors[2].setY(posY+size/2);
-        // vectors[2].setZ(posZ-size/2);
-
-        // vectors[3].setX(posX-size/2);
-        // vectors[3].setY(posY+size/2);
-        // vectors[3].setZ(posZ-size/2);
-
-        // //back wall verticies
-        // vectors[4].setX(posX+size/2);
-        // vectors[4].setY(posY-size/2);
-        // vectors[4].setZ(posZ+size/2);
-
-        // vectors[5].setX(posX-size/2);
-        // vectors[5].setY(posY-size/2);
-        // vectors[5].setZ(posZ+size/2);
-
-        // vectors[6].setX(posX-size/2);
-        // vectors[6].setY(posY+size/2);
-        // vectors[6].setZ(posZ+size/2);
-
-        // vectors[7].setX(posX+size/2);
-        // vectors[7].setY(posY+size/2);
-        // vectors[7].setZ(posZ+size/2);
-
 
         for (Wall wall : walls) {
             wall.updatePerspective();
