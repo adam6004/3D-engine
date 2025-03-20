@@ -1,13 +1,27 @@
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class MyFrame extends JFrame {
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
+public class MyFrame extends JFrame implements ActionListener {
+    private Board board;
+
     public MyFrame(String name) {
         super(name);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        add(new Board());
+        board = new Board();
+        add(board);
+        Timer timer = new Timer(16, this);
+        timer.start();
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        board.repaint();
     }
 }
