@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 public class Board extends JPanel{
     public static final int WIDTH = 800, HEIGHT = 800;
 
-    public static final double FIELD_OF_VIEW = 1000.0;
+    public static final double FIELD_OF_VIEW = 2000.0;
 
     public GameObject object;
 
@@ -15,7 +15,7 @@ public class Board extends JPanel{
         super();
         setPreferredSize(new Dimension(800, 800));
         setDoubleBuffered(true);
-        object = new GameObject(600, 400, 100, 100, 200, 100);
+        object = new GameObject(600, 400, 100, 100, 200, 100, 0, 0, 0);
     }
 
 

@@ -12,17 +12,23 @@ public class GameObject {
     
         private int posX, posY, posZ;
         private int width, height, depth;
+        private int rotationX, rotationY, rotationZ;
     
         private Vector[] vectors = new Vector[8];
     
-        public GameObject(int posX, int posY, int posZ, int width, int height, int depth) {
+        public GameObject(int posX, int posY, int posZ, int width, int height, int depth, int rotationX, int rotationY, int rotationZ) {
     
             this.posX = posX;
             this.posY = posY;
             this.posZ = posZ;
+
             this.width = width;
             this.height = height;
             this.depth = depth;
+
+            this.rotationX = rotationX;
+            this.rotationY = rotationY;
+            this.rotationZ = rotationZ;
     
     
             CreateVerticies();
@@ -47,12 +53,16 @@ public class GameObject {
             //back wall
             walls[5] = new Wall(vectors[4], vectors[5], vectors[6], vectors[7]);
     
+            for (Wall wall : walls) {
+                wall.updateRotationVar(rotationX, rotationY, rotationZ, posX, posY, posZ);
+            }
     
         }
     
         public void Draw(Graphics g) {
             g.setColor(Color.BLACK);
             for (Wall wall : walls) {
+                wall.updateRotationVar(rotationX, rotationY, rotationZ, posX, posY, posZ);
                 wall.DrawWall(g);
             }
         }
@@ -74,8 +84,6 @@ public class GameObject {
         }
     
         public void UpdateVerticiesPos() {
-    
-    
             for (int i = 0; i < vectors.length; i++) {
                 vectors[i].setX(posX + (OFFSETS[i][0] * width / 2));
                 vectors[i].setY(posY + (OFFSETS[i][1] * height / 2));
